@@ -18,7 +18,7 @@ class BugBlazer
         if (!config('bug-blazer.enabled')) {
             return null;
         }
-        if (config('bug-blazer.endpoint') && config('bug-blazer.environment')) {
+        if (!config('bug-blazer.endpoint') || !config('bug-blazer.environment')) {
             throw new BugBlazerException(__('BugBlazer is not configured properly.'));
         }
 
