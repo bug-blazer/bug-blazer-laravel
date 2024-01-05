@@ -23,6 +23,7 @@ class BugBlazer
         }
 
         $agent = new Agent();
+        $userAgent = $agent->getUserAgent();
 
         $data = [
             'environment' => config('bug-blazer.environment'),
@@ -38,14 +39,14 @@ class BugBlazer
             'request_path' => request()->path(),
             'request_headers' => request()->header(),
             'request_params' => request()->all(),
-            'browser_name' => $agent->browser() ?: 'unknown',
-            'browser_version' => $agent->version($agent->browser()) ?: 'unknown',
-            'os_name' => $agent->platform() ?: 'unknown',
-            'os_version' => $agent->version($agent->platform()) ?: 'unknown',
+            'browser_name' => $agent->browser($userAgent) ?: 'unknown',
+            'browser_version' => $agent->version($agent->browser($userAgent)) ?: 'unknown',
+            'os_name' => $agent->platform($userAgent) ?: 'unknown',
+            'os_version' => $agent->version($agent->platform($userAgent)) ?: 'unknown',
             'os_kernel_version' => php_uname('v'),
-            'device_brand' => $agent->device() ?: 'unknown',
-            'device_family' => $agent->deviceType() ?: 'unknown',
-            'device_model' => $agent->deviceType() ?: 'unknown',
+            'device_brand' => $agent->device($userAgent) ?: 'unknown',
+            'device_family' => $agent->deviceType($userAgent) ?: 'unknown',
+            'device_model' => $agent->deviceType($userAgent) ?: 'unknown',
             'runtime_name' => 'php',
             'runtime_version' => phpversion(),
             'server_name' => gethostname(),
