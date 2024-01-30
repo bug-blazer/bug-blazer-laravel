@@ -27,7 +27,7 @@ class BugBlazer
 
         $data = [
             'environment' => config('bug-blazer.environment'),
-            'type' => 'error',
+            'level' => 'error',
             'exception' => get_class($e),
             'code' => $e->getCode() ?: 500,
             'message' => $e->getMessage(),
