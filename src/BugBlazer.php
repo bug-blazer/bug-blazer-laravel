@@ -2,6 +2,7 @@
 
 namespace BugBlazer;
 
+use BugBlazer\Enums\ErrorLevels;
 use BugBlazer\Exceptions\BugBlazerException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -27,7 +28,7 @@ class BugBlazer
 
         $data = [
             'environment' => config('bug-blazer.environment'),
-            'level' => 'error',
+            'level' => ErrorLevels::ERROR,
             'exception' => get_class($e),
             'code' => $e->getCode() ?: 500,
             'message' => $e->getMessage(),
